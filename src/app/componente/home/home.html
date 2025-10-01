@@ -1,0 +1,25 @@
+<main class="home">
+    <section class="welcome-card card">
+        <h2 class="card-title">Bienvenido a la Sala de Juegos</h2>
+        <h3 class="card-subtitle">Elegí una sala o comenzá una partida rápida.</h3>
+
+        <div class="rooms">
+        <button class="room" (click)="enterRoom('Ahorcado')">Ahorcado</button>
+        <button class="room" (click)="enterRoom('Mayor o menor')">Mayor o menor</button>
+        <button class="room" (click)="enterRoom('Multiplayer')">Preguntados</button>
+        </div>
+
+        <div class="quick-actions">
+        <button class="btn" (click)="startQuickGame()">Partida rápida</button>
+        <button class="btn secondary" (click)="openSettings()">Configuración</button>
+        </div>
+    </section>
+
+    <section class="status card" *ngIf="session.currentRoom">
+        <h3>Estás en: {{ session.currentRoom }}</h3>
+        <p>Estado: {{ session.gameStatus }}</p>
+        <div class="actions">
+        <button class="btn" (click)="leaveRoom()">Salir de la sala</button>
+        </div>
+    </section>
+</main>

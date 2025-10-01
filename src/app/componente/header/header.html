@@ -1,0 +1,17 @@
+<header class="header">
+    <h1 class="brand">Sala de Juegos</h1>
+    <div class="header-right" *ngIf="session.isLoggedIn">
+        <span class="welcome">Hola, {{ session.displayName || session.email }}</span>
+        <button (click)="logout()" class="btn small">Cerrar sesión</button>
+    </div>
+    <!--
+    <nav class="navbar" *ngIf="session.isLoggedIn">
+        <ul>
+            <li><a (click)="goTo('home')">Inicio</a></li>
+            <li><a (click)="goTo('salas')">Salas</a></li>
+            <li><a (click)="goTo('ranking')">Ranking</a></li>
+            <li><a (click)="goTo('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+    -->
+</header>

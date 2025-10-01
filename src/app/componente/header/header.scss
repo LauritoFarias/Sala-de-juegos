@@ -1,0 +1,41 @@
+.header {
+  background: #2c3e50;
+  color: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-right{
+  margin-right: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.brand {
+  margin: 0;
+}
+
+.btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+.btn:hover {
+  background: #2980b9;
+}
+.btn.secondary {
+  background: #95a5a6;
+}
+.btn.secondary:hover {
+  background: #7f8c8d;
+}
+.btn.small {
+  font-size: 0.8rem;
+}

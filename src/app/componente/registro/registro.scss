@@ -1,0 +1,162 @@
+.app-container {
+  font-family: Arial, sans-serif;
+  background: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.footer {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.header {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+  color: #ddd;
+}
+
+.big-footer-text {
+  font-size: 1.2rem;
+}
+
+.card {
+  background: #fff;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+.btn:hover { background: #2980b9; }
+
+.btn.secondary {
+  background: #95a5a6;
+}
+.btn.secondary:hover {
+  background: #7f8c8d;
+}
+
+.btn.small {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.register-form .password-group,
+.register-form .actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+.register-form .btn {
+  width: 100%;
+  max-width: 100%;
+}
+
+.register-form .actions {
+  margin-top: auto;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.room {
+  background: #27ae60;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.room:hover { background: #1e8449; }
+
+.status {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.password-row {
+  position: relative;
+}
+
+.password-row input {
+  padding-right: 2.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #999;
+  transition: color 0.2s ease;
+}
+.toggle-password:hover { color: #333; }

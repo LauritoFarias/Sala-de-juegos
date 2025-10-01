@@ -1,0 +1,84 @@
+<main class="card center">
+    <h2>Registro</h2>
+
+    <form class="register-form" (ngSubmit)="register()" #loginForm="ngForm" novalidate>
+        <label for="email">Correo electrónico</label>
+        <input
+        id="mail"
+        name="mail"
+        type="email"
+        required
+        [(ngModel)]="mail"
+        #emailRef="ngModel"
+        />
+        <div class="error" *ngIf="emailRef.invalid && emailRef.touched">
+        Ingresa un correo válido.
+        </div>
+
+        <label for="password">Contraseña</label>
+        <div class="password-row">
+            <input
+                id="password"
+                name="password"
+                type="{{ showPassword ? 'text' : 'password' }}"
+                required
+                minlength="6"
+                [(ngModel)]="password"
+                #passRef="ngModel"
+            />
+            <i
+                class="toggle-password fa"
+                [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+                (click)="toggleShowPassword()"
+            ></i>
+        </div>
+        <div class="error" *ngIf="passRef.invalid && passRef.touched">
+        La contraseña debe tener al menos 6 caracteres.
+        </div>
+
+        <label for="email">Nombre</label>
+        <input
+        id="name"
+        name="name"
+        type="name"
+        required
+        [(ngModel)]="name"
+        #nameRef="ngModel"
+        />
+        <div class="error" *ngIf="nameRef.invalid && nameRef.touched">
+        Ingresa un nombre válido.
+        </div>
+
+        <label for="email">Edad</label>
+        <input
+        id="age"
+        name="age"
+        type="number"
+        required
+        [(ngModel)]="age"
+        #ageRef="ngModel"
+        />
+        <div class="error" *ngIf="ageRef.invalid && ageRef.touched">
+        Ingresa una edad válida.
+        </div>
+
+        <label for="photo">Foto de perfil</label>
+        <input
+        id="photo"
+        name="photo"
+        type="file"
+        accept="image/*"
+        required
+        (change)="onFileSelected($event)"
+        />
+        <div class="error" *ngIf="!avatarFile && loginForm.submitted">
+        Se debe seleccionar una foto.
+        </div>
+
+        <div class="actions">
+        <button class="btn secondary" type="submit">Registrarse</button>
+        </div>
+
+        <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    </form>
+</main>
