@@ -1,0 +1,160 @@
+<div class="encuesta-container">
+  <form class="encuesta-form" #encuestaForm="ngForm" (ngSubmit)="onSubmit()">
+    <h2>Encuesta de Experiencia - Sala de Juegos</h2>
+    
+    <div class="campo">
+      <label for="nombre" class="required">Nombre y Apellido:</label>
+      <input 
+        type="text" 
+        id="nombre"
+        name="nombre" 
+        ngModel 
+        #nombre="ngModel" 
+        required
+        placeholder="Ingresa tu nombre completo">
+      <div *ngIf="nombre.invalid && nombre.touched" class="error">
+        Este campo es requerido
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="edad" class="required">Edad:</label>
+      <input 
+        type="number" 
+        id="edad"
+        name="edad" 
+        ngModel 
+        #edad="ngModel" 
+        required 
+        min="18" 
+        max="99"
+        placeholder="Tu edad">
+      <div *ngIf="edad.invalid && edad.touched" class="error">
+        <div *ngIf="edad.errors?.['required']">Campo requerido</div>
+        <div *ngIf="edad.errors?.['min'] || edad.errors?.['max']">
+          Debe ser entre 18 y 99 años
+        </div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="telefono" class="required">Teléfono:</label>
+      <input 
+        type="tel" 
+        id="telefono"
+        name="telefono" 
+        ngModel 
+        #telefono="ngModel" 
+        required 
+        pattern="[0-9]{1,10}"
+        placeholder="Número de teléfono (solo números)">
+      <div *ngIf="telefono.invalid && telefono.touched" class="error">
+        <div *ngIf="telefono.errors?.['required']">Campo requerido</div>
+        <div *ngIf="telefono.errors?.['pattern']">
+          Solo números (máx. 10 dígitos)
+        </div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label class="required">¿Cómo calificarías nuestra variedad de juegos?</label>
+      <div class="opciones-grupo">
+        <div class="opcion" *ngFor="let opcion of preguntas.calificacion">
+          <input 
+            type="radio" 
+            name="calificacion" 
+            [value]="opcion" 
+            ngModel 
+            required>
+          <span>{{ opcion }}</span>
+        </div>
+      </div>
+      <div *ngIf="encuestaForm.controls['calificacion']?.invalid && encuestaForm.controls['calificacion']?.touched" class="error">
+        Selecciona una opción
+      </div>
+    </div>
+
+    <div class="campo">
+        <label class="required">¿Qué servicios adicionales te gustaría?</label>
+        <div class="opciones-grupo">
+            <div class="opcion" *ngFor="let servicio of preguntas.servicios">
+            <input 
+                type="checkbox" 
+                [id]="'servicio-' + servicio"
+                [name]="'servicio-' + servicio"
+                [(ngModel)]="serviciosSeleccionados[servicio]">
+            <span>{{ servicio }}</span>
+            </div>
+        </div>
+        <div *ngIf="!alMenosUnServicioSeleccionado() && encuestaForm.submitted" class="error">
+            Selecciona al menos un servicio
+        </div>
+    </div>
+
+    <div class="campo">
+      <label for="frecuencia" class="required">¿Con qué frecuencia nos visitas?</label>
+      <select id="frecuencia" name="frecuencia" ngModel #frecuencia="ngModel" required>
+        <option value="" disabled selected>Selecciona una opción...</option>
+        <option *ngFor="let freq of preguntas.frecuencia" [value]="freq">
+          {{ freq }}
+        </option>
+      </select>
+      <div *ngIf="frecuencia.invalid && frecuencia.touched" class="error">
+        Este campo es requerido
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="juegoFavorito" class="required">¿Qué juego disfrutaste más y por qué?</label>
+      <textarea 
+        id="juegoFavorito"
+        name="juegoFavorito" 
+        ngModel 
+        #juegoFavorito="ngModel" 
+        required
+        placeholder="Cuéntanos sobre tu experiencia con el juego que más te gustó...">
+      </textarea>
+      <div *ngIf="juegoFavorito.invalid && juegoFavorito.touched" class="error">
+        Explica tu juego favorito
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="referido" class="required">¿Recomendarías nuestro sitio? (Escribe tu email para referidos)</label>
+      <input 
+        type="email" 
+        id="referido"
+        name="referido" 
+        ngModel 
+        #referido="ngModel" 
+        required 
+        email
+        placeholder="tucorreo@ejemplo.com">
+      <div *ngIf="referido.invalid && referido.touched" class="error">
+        <div *ngIf="referido.errors?.['required']">Campo requerido</div>
+        <div *ngIf="referido.errors?.['email']">Formato de email inválido</div>
+      </div>
+    </div>
+
+    <div *ngIf="enviando" class="estado-envio">
+      <div class="spinner"></div>
+      <p>Enviando encuesta...</p>
+    </div>
+
+    <div *ngIf="enviadoExitosamente" class="estado-exito">
+      <p>✅ ¡Encuesta enviada con éxito! Gracias por tu feedback.</p>
+    </div>
+
+    <div *ngIf="errorEnvio" class="estado-error">
+      <p>❌ Error al enviar la encuesta. Por favor, intenta nuevamente.</p>
+    </div>
+
+    <button 
+        type="submit" 
+        class="boton-enviar" 
+        [disabled]="enviando || (!alMenosUnServicioSeleccionado() && encuestaForm.submitted)">
+        {{ enviando ? 'Enviando...' : 'Enviar Encuesta' }}
+    </button>
+    
+  </form>
+</div>

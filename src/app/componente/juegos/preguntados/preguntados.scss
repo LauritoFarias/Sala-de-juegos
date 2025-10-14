@@ -1,0 +1,250 @@
+.game-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ffd90f 0%, #ff6b00 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.life {
+  margin: 0 2px;
+  font-size: 18px;
+  color: #e74c3c;
+}
+
+.character-image {
+  margin: 20px 0;
+}
+
+.character-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 4px solid white;
+  background: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.option-btn {
+  padding: 15px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #2e86de 0%, #0abde3 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.option-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.message {
+  margin: 15px 0;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 27px;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.message.correct {
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.message.incorrect {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.game-info {
+  margin-top: 10px;
+  color: #666;
+  font-size: 12px;
+}
+
+.game-over {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.stats {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.restart-btn, .retry-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.restart-btn:hover, .retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ff6b00;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .game-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .character-img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .options {
+    gap: 8px;
+  }
+  
+  .option-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+}
+
+.user-info {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+}
+
+.save-status {
+  color: #2ecc71;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.partida-status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #ffeb3b;
+  color: #333;
+}
+
+.partida-status.guardada {
+  background: #4caf50;
+  color: white;
+}
+
+.save-status.guardada {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.btn-volver {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-volver:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}

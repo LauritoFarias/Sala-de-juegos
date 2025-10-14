@@ -1,142 +1,370 @@
-.app-container {
-  font-family: Arial, sans-serif;
-  background: #f4f4f9;
+:host {
+  display: block;
+  width: 100%;
+}
+
+.home {
+  padding: 30px 20px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  background: #2c3e50;
-  color: #fff;
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 25px;
 }
 
-.brand {
-  margin: 0;
-}
-
-.user-info {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.footer {
-  margin-top: auto;
-  background: #2c3e50;
-  color: #ddd;
-  text-align: center;
-  padding: 10px;
-  font-size: 0.85rem;
-}
-
+/* Tarjetas generales */
 .card {
-  background: #fff;
-  margin: 30px auto;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
 }
-.card h2 {
-  margin-top: 0;
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+}
+
+/* Panel de administración */
+.admin-panel {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-left: 4px solid #e74c3c;
+  max-width: 800px;
+}
+
+.admin-panel .card-title {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.admin-panel .card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Tarjeta de bienvenida */
+.welcome-card {
+  text-align: center;
+  max-width: 700px;
+}
+
+.card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 8px;
   text-align: center;
 }
 
-input {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.btn {
-  background: #3498db;
-  color: #fff;
-  border: none;
-  padding: 8px 76px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.2s ease;
-}
-.btn:hover {
-  background: #2980b9;
-}
-.btn.secondary {
-  background: #95a5a6;
-}
-.btn.secondary:hover {
-  background: #7f8c8d;
-}
-.btn.small {
-  padding: 5px 10px;
-  font-size: 0.8rem;
-}
-
-.big-footer-text {
-    font-size: 1.2rem;
-}
-
-.welcome-card {
-  min-width: max-content;
-  white-space: nowrap;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-}
-
-.quick-actions {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.error {
-  color: #e74c3c;
-  font-size: 0.9rem;
+.card-subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-weight: 400;
   text-align: center;
 }
 
 .rooms {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 15px;
+  margin: 25px 0;
+  width: 100%;
 }
 
 .room {
-  background: #27ae60;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
   color: white;
-  padding: 10px;
+  padding: 20px 15px;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.room::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
 .room:hover {
-  background: #1e8449;
+  background: linear-gradient(135deg, #219653, #27ae60);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(39, 174, 96, 0.4);
 }
 
-.status {
-  margin-top: 20px;
+.room:hover::before {
+  left: 100%;
+}
+
+.room:active {
+  transform: translateY(-1px);
+}
+
+/* Acciones rápidas */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quick-actions .btn {
+  flex: 1;
+  min-width: 120px;
+  max-width: 180px;
+}
+
+/* Botones generales */
+.btn {
+  background: linear-gradient(to bottom, #3498db, #2980b9);
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
   text-align: center;
 }
 
-.card-title {
-  font-size: 2rem;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: bold;
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
-.card-subtitle {
-  font-size: 1.5rem;
+.btn:hover {
+  background: linear-gradient(to bottom, #2980b9, #2471a3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  color: white;
+  text-decoration: none;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn:disabled:hover::before {
+  left: -100%;
+}
+
+.btn.secondary {
+  background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+}
+
+.btn.secondary:hover {
+  background: linear-gradient(to bottom, #7f8c8d, #6c7b7d);
+}
+
+.btn.admin-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 20px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.btn.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sección de estado */
+.status {
+  text-align: center;
+  max-width: 500px;
+}
+
+.status h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.status p {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.status .actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Chat */
+app-chat {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home {
+    padding: 20px 15px;
+    gap: 20px;
+  }
+  
+  .card {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+  
+  .card-title {
+    font-size: 1.7rem;
+  }
+  
+  .card-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .room {
+    padding: 18px 12px;
+    font-size: 1.2rem;
+    min-height: 65px;
+  }
+  
+  .quick-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quick-actions .btn {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .admin-actions {
+    flex-direction: column;
+  }
+  
+  .admin-panel .card-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 15px 10px;
+  }
+  
+  .card {
+    padding: 20px 15px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .room {
+    font-size: 1.1rem;
+    padding: 16px 10px;
+    min-height: 60px;
+  }
+  
+  .btn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Animaciones de entrada */
+.card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.admin-panel {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.welcome-card {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.status {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

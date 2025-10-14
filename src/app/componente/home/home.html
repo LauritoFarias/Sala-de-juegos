@@ -1,17 +1,30 @@
 <main class="home">
+    <section *ngIf="isAdmin" class="admin-panel card">
+        <h2 class="card-title">🔧 Panel de Administración</h2>
+        <p class="card-subtitle">Acceso exclusivo para administradores</p>
+        
+        <div class="admin-actions">
+            <button class="btn admin-btn" (click)="goToAdminPanel()">
+                📊 Ver Resultados de Encuestas
+            </button>
+        </div>
+    </section>
+
     <section class="welcome-card card">
-        <h2 class="card-title">Bienvenido a la Sala de Juegos</h2>
+        <h2 class="card-title">Bienvenido, {{ usersdata?.nombre }}</h2>
         <h3 class="card-subtitle">Elegí una sala o comenzá una partida rápida.</h3>
 
         <div class="rooms">
-        <button class="room" (click)="enterRoom('Ahorcado')">Ahorcado</button>
-        <button class="room" (click)="enterRoom('Mayor o menor')">Mayor o menor</button>
-        <button class="room" (click)="enterRoom('Multiplayer')">Preguntados</button>
+        <a class="room" (click)="goToAhorcado()">Ahorcado</a>
+        <a class="room" (click)="goToMayorOMenor()">Mayor o menor</a>
+        <a class="room" (click)="navegarAPreguntados()">Preguntados</a>
+        <a class="room" (click)="goToSimon()">Simon</a>
         </div>
 
         <div class="quick-actions">
-        <button class="btn" (click)="startQuickGame()">Partida rápida</button>
-        <button class="btn secondary" (click)="openSettings()">Configuración</button>
+        <button class="btn" [routerLink]="['/contenido/resultados']">Puntajes</button>
+        <button class="btn" [routerLink]="['/contenido/encuesta']">Encuesta</button>
+        <button class="btn secondary" (click)="abrirChat()">Chat</button>
         </div>
     </section>
 
@@ -22,4 +35,7 @@
         <button class="btn" (click)="leaveRoom()">Salir de la sala</button>
         </div>
     </section>
+
+    <app-chat *ngIf="chatAbierto" [usuario]="usersdata?.nombre" [cerrarChat]="cerrarChat"></app-chat>
+    
 </main>

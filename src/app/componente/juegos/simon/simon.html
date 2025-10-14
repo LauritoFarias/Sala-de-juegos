@@ -1,0 +1,34 @@
+<div class="simon-container">
+  <div class="game-info">
+    <h2>Simon Game</h2>
+    <button [routerLink]="['/contenido/home']" class="btn-volver">← Volver</button>
+    <div class="score">Puntuación: {{score}}</div>
+    <div class="round">Ronda: {{round}}</div>
+    <button *ngIf="!gameStarted" (click)="startGame()" class="start-btn">
+      Comenzar Juego
+    </button>
+    <button *ngIf="gameOver" (click)="startGame()" class="restart-btn">
+      Jugar de Nuevo
+    </button>
+    <div *ngIf="gameStarted && !isUserTurn" class="message">
+      ¡Memoriza la secuencia!
+    </div>
+    <div *ngIf="gameStarted && isUserTurn" class="message">
+      ¡Tu turno! Repite la secuencia
+    </div>
+    <div *ngIf="gameOver" class="message game-over">
+      ¡Game Over! Puntuación final: {{score}}
+    </div>
+  </div>
+
+  <div class="simon-donut">
+    <div *ngFor="let color of colors; let i = index" 
+         class="color-segment"
+         [style.background]="color"
+         [class.active]="activeSector === i"
+         [class.disabled]="!isUserTurn"
+         [style.transform]="getSegmentTransform(i)"
+         (click)="onColorClick(i)">
+    </div>
+  </div>
+</div>

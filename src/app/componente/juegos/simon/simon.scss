@@ -1,0 +1,109 @@
+.simon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #2c3e50;
+  font-family: 'Arial', sans-serif;
+  gap: 50px;
+}
+
+.game-info {
+  text-align: center;
+  color: white;
+  
+  h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #f1c40f;
+  }
+  
+  .score, .round {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  .message {
+    font-size: 1.2em;
+    margin: 20px 0;
+    min-height: 30px;
+    
+    &.game-over {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+  }
+}
+
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background 0.3s;
+  
+  &:hover {
+    background: #2980b9;
+  }
+  
+  &.restart-btn {
+    background: #e74c3c;
+    
+    &:hover {
+      background: #c0392b;
+    }
+  }
+}
+
+.simon-donut {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  mask: radial-gradient(circle, transparent 35%, black 36%);
+  -webkit-mask: radial-gradient(circle, transparent 35%, black 36%);
+}
+
+.color-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%);
+  transform-origin: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &.active {
+    filter: brightness(1.8) saturate(2);
+    transform: scale(1.05);
+  }
+
+  &:hover:not(.disabled) {
+    filter: brightness(1.3);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+.btn-volver {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-volver:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}

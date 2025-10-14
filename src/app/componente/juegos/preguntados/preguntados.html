@@ -1,0 +1,58 @@
+<div class="game-container" *ngIf="gameStarted && !isLoading">
+  <div class="game-header">
+    <div class="lives">Vidas: 
+      <span *ngFor="let life of [].constructor(lives)" class="life">❤️</span>
+    </div>
+    <div class="score">Puntuación: {{ score }}</div>
+    <button [routerLink]="['/contenido/home']" class="btn-volver">← Volver</button>
+  </div>
+
+  <div class="game-content" *ngIf="!gameOver && currentCharacter">
+    <h2>¿Cómo se llama este personaje de Los Simpson?</h2>
+    
+    <div class="character-image">
+      <img 
+        [src]="currentCharacter.image" 
+        [alt]="currentCharacter.name"
+        (error)="handleImageError($event)"
+        class="character-img">
+    </div>
+    
+    <div class="options">
+      <button 
+        *ngFor="let option of options; let i = index" 
+        (click)="selectOption(option)"
+        class="option-btn"
+        [disabled]="message">
+        {{ option.name }}
+      </button>
+    </div>
+    
+    <div class="message" *ngIf="message" 
+         [class.correct]="message.includes('Correcto')"
+         [class.incorrect]="message.includes('Incorrecto')">
+      {{ message }}
+    </div>
+  </div>
+
+  <div class="game-over" *ngIf="gameOver">
+    <h2>¡Juego Terminado!</h2>
+    <p>Tu puntuación final: {{ score }}</p>
+    <p class="stats">Acertaste {{ score }} de {{ score + (3 - lives) }} preguntas</p>
+    <p class="save-status" [class.guardada]="partidaGuardada">
+      {{ partidaGuardada ? '✅ Partida guardada en la base de datos' : '❌ Partida no guardada' }}
+    </p>
+    <button (click)="restartGame()" class="restart-btn">Jugar de nuevo</button>
+  </div>
+</div>
+
+<div class="loading" *ngIf="isLoading">
+  <div class="spinner"></div>
+  <p>Cargando 60 personajes de Los Simpson...</p>
+  <small>Esto puede tomar unos segundos</small>
+</div>
+
+<div class="error-container" *ngIf="error && !isLoading">
+  <div class="error-message">❌ {{ error }}</div>
+  <button (click)="retryLoad()" class="retry-btn">Reintentar carga</button>
+</div>

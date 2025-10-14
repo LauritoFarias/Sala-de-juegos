@@ -35,6 +35,10 @@ export class Registro {
 
   register() {
     console.log('Inciando registro en Supabase...')
+    if (!this.avatarFile) {
+      this.errorMessage = 'Por favor, seleccioná una imagen de perfil.';
+      return;
+    }
     supabase.auth.signUp({
       email: this.mail,
       password: this.password,
@@ -57,22 +61,51 @@ export class Registro {
 
   }
 
-  saveUserData(user: User) {
+  async saveUserData(user: User) {
+    console.log('🟢 Iniciando guardado de datos para:', user.id);
 
-    const avatarUrl = this.saveFile().then((data) => {
-      if (data) { 
+    try {
+      // 1️⃣ Subir imagen si existe
+      if (!this.avatarFile) {
+        console.warn('⚠️ No se seleccionó ningún archivo de imagen.');
+      } else {
+        console.log('📤 Subiendo imagen a Supabase Storage...');
+        const { data: uploadData, error: uploadError } = await supabase
+          .storage
+          .from('images')
+          .upload(`users/${user.id}-${this.avatarFile.name}`, this.avatarFile, {
+            cacheControl: '3600',
+            upsert: false,
+          });
 
-        supabase.from('users').insert([
-          { userId: user.id, nombre: this.name, edad: this.age, avatarUrl: data.path }
-        ]).then(({ data, error }) => {
-          if (error) {
-            console.error('Error:', error.message);
-          } else {
-            this.goTo('/home');
-          }
-        });
+        if (uploadError) {
+          console.error('❌ Error subiendo imagen:', uploadError.message);
+        } else {
+          console.log('✅ Imagen subida correctamente:', uploadData.path);
+        }
+
+        // 2️⃣ Insertar usuario en tabla "users"
+        console.log('🧩 Insertando usuario en tabla "users"...');
+        const { data: insertData, error: insertError } = await supabase
+          .from('users')
+          .insert({
+            userId: user.id,
+            nombre: this.name,
+            edad: this.age,
+            avatarUrl: uploadData?.path ?? null,
+          })
+          .select(); // para ver qué se insertó
+
+        if (insertError) {
+          console.error('❌ Error insertando usuario:', insertError.message);
+        } else {
+          console.log('✅ Usuario insertado:', insertData);
+          this.goTo('/home');
+        }
       }
-    });
+    } catch (err) {
+      console.error('💥 Error inesperado en saveUserData:', err);
+    }
   }
 
   async saveFile() {

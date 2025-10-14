@@ -1,0 +1,66 @@
+<div class="historial-container">
+  <div class="resultados-container">
+
+    <!-- NAV INTERNO -->
+    <nav class="juego-nav">
+      <button
+        *ngFor="let juego of juegos"
+        (click)="seleccionarJuego(juego.id)"
+        [class.activo]="juego.id === juegoSeleccionado">
+        {{ juego.juego }}
+      </button>
+    </nav>
+
+    <!-- CONTENIDO -->
+    <div class="contenido" *ngIf="!cargando && juegoSeleccionado">
+
+      <h2 class="titulo">Historial de {{ nombreJuegoSeleccionado }}</h2>
+
+      <!-- Descripción del juego -->
+      <p class="descripcion-juego">
+        {{ descripcionJuegoSeleccionado || 'Sin descripción disponible.' }}
+      </p>
+
+      <div *ngIf="cargando">Cargando...</div>
+
+      <p *ngIf="!cargando && partidas.length === 0">
+        No hay partidas registradas todavía.
+      </p>
+
+      <!-- TABLA -->
+      <div class="tabla-wrapper">
+        <table class="tabla-resultados" *ngIf="partidas.length > 0; else sinDatos">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Puntaje</th>
+              <th>Fecha de finalización</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partida of partidas; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ partida.users?.nombre || '—' }}</td>
+              <td>{{ partida.users?.edad || '—' }}</td>
+              <td>{{ partida.puntaje ?? '—' }}</td>
+              <td>{{ partida.completado_en | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #sinDatos>
+        <p class="sin-datos">No hay partidas registradas todavía para este juego.</p>
+      </ng-template>
+    </div>
+
+    <!-- CARGANDO -->
+    <div *ngIf="cargando" class="cargando">
+      <div class="spinner"></div>
+      <p>Cargando resultados...</p>
+    </div>
+
+  </div>
+</div>

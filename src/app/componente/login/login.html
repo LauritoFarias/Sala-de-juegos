@@ -11,6 +11,7 @@
         [(ngModel)]="email"
         #emailRef="ngModel"
         placeholder="tu@ejemplo.com"
+        [disabled]="isLoading"
         />
         <div class="error" *ngIf="emailRef.invalid && emailRef.touched">
         Ingresa un correo válido.
@@ -27,6 +28,7 @@
                 [(ngModel)]="password"
                 #passRef="ngModel"
                 placeholder="••••••"
+                [disabled]="isLoading"
             />
             <i
                 class="toggle-password fa"
@@ -39,14 +41,27 @@
         </div>
 
         <div class="actions">
-        <button class="btn" type="submit" [disabled]="loginForm.invalid">Entrar</button>
-        <button class="btn secondary" type="button" (click)="useGuest()">Entrar como invitado</button>
-        <button class="btn secondary" type="button" (click)="goTo('/registro')">Registrarse</button>
+        <button class="btn" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Entrar</span>
+            <span *ngIf="isLoading">Procesando...</span>
+        </button>
+        <button class="btn secondary" type="button" (click)="goTo('/contenido/registro')" [disabled]="isLoading">
+            Registrarse
+        </button>
+        </div>
+
+        <div *ngIf="isLoading" class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Verificando credenciales...</p>
         </div>
 
         <div class="quick-access">
             <p>Acceso rápido:</p>
-            <button class="btn small" type="button" (click)="llenarCamposAccesoRapido('samsung.farias98@gmail.com')">samsung.farias98@gmail.com</button>
+            <button class="btn small" type="button" 
+                    (click)="llenarCamposAccesoRapido('samsung.farias98@gmail.com')"
+                    [disabled]="isLoading">
+                samsung.farias98@gmail.com
+            </button>
         </div>
 
         <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>

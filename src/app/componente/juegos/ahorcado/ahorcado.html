@@ -1,0 +1,43 @@
+<div class="ahorcado-container">
+  <!-- Header con título centrado y botón a la derecha -->
+  <div class="ahorcado-header">
+    <h2>Ahorcado</h2>
+    <button [routerLink]="['/contenido/home']" class="btn-volver">← Volver</button>
+  </div>
+
+  <div class="puntuacion">
+    <h3>Puntuación: {{puntuacionTotal}}</h3>
+    <p>Palabras adivinadas: {{palabrasAdivinadas}}</p>
+  </div>
+
+  <!-- Botón de reinicio -->
+  <button *ngIf="juegoTerminado" (click)="iniciarJuego()" class="btn-reiniciar">
+    🔄 Jugar de nuevo
+  </button>
+
+  <div class="interfaz-juego">
+    <div class="monigote">
+      <img [src]="imagenMonigote" alt="Monigote" />
+    </div>
+
+    <div class="palabra">
+      <span *ngFor="let letra of palabraMostrada" class="letra">{{ letra }}</span>
+    </div>
+  </div>
+
+  <div class="teclado">
+    <button
+      *ngFor="let letra of abecedario"
+      #btn
+      (click)="elegirLetra(letra, btn)"
+      [disabled]="juegoTerminado"
+    >
+      {{ letra }}
+    </button>
+  </div>
+
+  <div class="mensaje-final" *ngIf="juegoTerminado">
+    <p>{{ mensajeFinal }}</p>
+    <button (click)="iniciarJuego()">Reiniciar</button>
+  </div>
+</div>

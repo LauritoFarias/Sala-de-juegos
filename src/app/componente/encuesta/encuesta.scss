@@ -1,0 +1,269 @@
+$primary-color: #3498db;
+$primary-dark: #2980b9;
+$error-color: #e74c3c;
+$success-color: #2ecc71;
+$text-color: #333;
+$light-gray: #f5f5f5;
+$border-color: #ddd;
+
+// Estilos generales del formulario
+.encuesta-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.encuesta-form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  
+  h2 {
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: 0.5rem;
+  }
+}
+
+// Grupos de campos
+.campo {
+  margin-bottom: 1.8rem;
+  position: relative;
+
+  label {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+    color: $text-color;
+    font-size: 1rem;
+    
+    &.required::after {
+      content: " *";
+      color: $error-color;
+    }
+  }
+
+  // Estilos para inputs, selects y textareas
+  input:not([type="radio"]):not([type="checkbox"]),
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: $light-gray;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+    
+    &.ng-invalid.ng-touched {
+      border-color: $error-color;
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  // Estilos para radio buttons y checkboxes
+  .opciones-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    
+    .opcion {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: rgba(52, 152, 219, 0.05);
+      }
+      
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: 0.8rem;
+        transform: scale(1.2);
+        
+        &:focus {
+          outline: 2px solid $primary-color;
+          outline-offset: 2px;
+        }
+      }
+      
+      span {
+        font-weight: normal;
+      }
+    }
+  }
+
+  // Estilos para el select
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+  }
+}
+
+// Mensajes de error
+.error {
+  color: $error-color;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: "⚠";
+    margin-right: 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+// Botón de enviar
+.boton-enviar {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .encuesta-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .encuesta-form {
+    padding: 1.5rem;
+    border-radius: 8px;
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .campo {
+    margin-bottom: 1.5rem;
+    
+    input:not([type="radio"]):not([type="checkbox"]),
+    select,
+    textarea {
+      padding: 0.75rem;
+    }
+  }
+}
+
+// Animación de entrada
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.encuesta-form {
+  animation: fadeIn 0.5s ease-out;
+}
+
+// Estados de envío
+.estado-envio,
+.estado-exito,
+.estado-error {
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.estado-envio {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.estado-exito {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.estado-error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #f44336;
+}
+
+// Spinner
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e3f2fd;
+  border-top: 2px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

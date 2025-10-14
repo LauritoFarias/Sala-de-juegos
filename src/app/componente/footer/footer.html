@@ -1,3 +1,7 @@
 <footer class="footer">
-    <small class="big-footer-text">© {{ year }} Sala de Juegos | <a class="link" (click)="goTo('quien-soy')">Quién Soy</a> </small>
+  <small class="big-footer-text">
+    © {{ year }} Sala de Juegos |
+    <a class="link" [routerLink]="['/contenido/quien-soy']"> Quién Soy |</a>
+    <a class="link" (click)="volver()">Volver</a>
+  </small>
 </footer>

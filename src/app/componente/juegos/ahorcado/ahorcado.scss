@@ -1,0 +1,118 @@
+.ahorcado-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #f7f7f7;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.interfaz-juego {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 300px;
+}
+
+.monigote {
+  align-self: flex-end;
+  margin-right: 2rem;
+}
+
+.palabra {
+  align-self: flex-end;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+  text-align: center;
+}
+
+.teclado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+
+  button {
+    background: #e0e0e0;
+    border: none;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #ccc;
+    }
+
+    &:disabled {
+      background: #aaa;
+      color: #fff;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.mensaje-final {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+
+  button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      background: #0056b3;
+    }
+  }
+}
+
+.ahorcado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+}
+
+.btn-volver {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-volver:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.btn-reiniciar {
+  background-color: #ffeb3b;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin: 1rem 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-reiniciar:hover {
+  background-color: #fdd835;
+  transform: translateY(-1px);
+}

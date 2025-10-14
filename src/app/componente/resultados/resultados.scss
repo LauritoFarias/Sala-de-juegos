@@ -1,0 +1,120 @@
+.resultados-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* NAV DE JUEGOS */
+.juego-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+
+  button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &.activo {
+      background-color: #007bff;
+      color: white;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    }
+  }
+}
+
+/* CONTENIDO */
+.contenido {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  overflow-x: hidden;
+
+  .titulo {
+    text-align: center;
+    margin-bottom: 0.8rem;
+    color: #222;
+  }
+
+  .descripcion-juego {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-style: italic;
+  }
+
+  .tabla-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      word-wrap: break-word;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #eef6ff;
+    }
+  }
+
+  .sin-datos {
+    text-align: center;
+    color: #777;
+    margin-top: 1rem;
+  }
+}
+
+/* CARGANDO */
+.cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+
+  .spinner {
+    border: 4px solid #ddd;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: girar 1s linear infinite;
+  }
+
+  @keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}

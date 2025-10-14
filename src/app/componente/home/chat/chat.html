@@ -1,0 +1,46 @@
+<div class="chat-window">
+  <div class="chat-header">
+    <span>Chat - {{ usuario || 'Usuario' }}</span>
+    <button class="close-btn" (click)="cerrarChat()">x</button>
+  </div>
+
+  <div class="chat-content">
+    <div class="chat-body"
+    (scroll)="onChatScroll($event)"
+    #chatBody>
+      <div
+        *ngFor="let msg of mensajes"
+        class="mensaje"
+        [ngClass]="{ 'mio': msg.autor === usuario, 'otro': msg.autor !== usuario }">
+        <div class="burbuja">
+          <div class="texto">{{ msg.texto }}</div>
+          <div class="hora">{{ msg.hora }}</div>
+        </div>
+      </div>
+    </div>
+
+    <button 
+      *ngIf="mostrarBotonNuevosMensajes"
+      class="nuevos-mensajes-btn"
+      (click)="irAlUltimoMensaje()">
+      <span class="notification-badge">{{ nuevosMensajesCount }}</span>
+      ↓
+    </button>
+
+    <div class="typing-indicator" *ngIf="escribiendoUsuarios.size > 0">
+      <span *ngFor="let user of escribiendoUsuarios.keys()">{{ user }}</span>
+      <span *ngIf="escribiendoUsuarios.size === 1"> está escribiendo...</span>
+      <span *ngIf="escribiendoUsuarios.size > 1"> están escribiendo...</span>
+    </div>
+
+    <div class="chat-input">
+      <input
+        [(ngModel)]="nuevoMensaje"
+        (input)="usuarioEscribiendo()"
+        (keyup.enter)="enviarMensaje()"
+        placeholder="Escribí un mensaje..."
+      />
+      <button (click)="enviarMensaje()">Enviar</button>
+    </div>
+  </div>
+</div>

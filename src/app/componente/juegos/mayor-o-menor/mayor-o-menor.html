@@ -1,0 +1,54 @@
+<div class="game-container">
+  <h1>Mayor o Menor</h1>
+
+  <div class="game-header">
+    <button [routerLink]="['/contenido/home']" class="btn-volver">← Volver</button>
+    <div class="score">Puntuación: {{ score }}</div>
+  </div>
+  
+  <div class="user-info" *ngIf="userData">
+    <small>Jugando como: {{ userData.nombre || userData.email }}</small>
+  </div>
+  
+  <div class="cards-container">
+    <div class="card-section">
+      <h3>Carta Actual</h3>
+      <div *ngIf="currentCard" class="card current-card">
+        <img [src]="currentCard.image" [alt]="getTranslatedCard(currentCard).value + ' de ' + getTranslatedCard(currentCard).suit">
+        <p>{{ getTranslatedCard(currentCard).value }} de {{ getTranslatedCard(currentCard).suit }}</p>
+      </div>
+    </div>
+
+    <div class="card-section">
+      <h3>Carta Siguiente</h3>
+      <div *ngIf="showNextCard && nextCard" class="card next-card">
+        <img [src]="nextCard.image" [alt]="getTranslatedCard(nextCard).value + ' de ' + getTranslatedCard(nextCard).suit">
+        <p>{{ getTranslatedCard(nextCard).value }} de {{ getTranslatedCard(nextCard).suit }}</p>
+      </div>
+      <div *ngIf="!showNextCard" class="card hidden-card">
+        <img src="https://deckofcardsapi.com/static/img/back.png" alt="Mazo boca abajo">
+        <p class="empty-text">&nbsp;</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="message" [class.game-over]="gameOver">
+    {{ message }}
+  </div>
+
+  <div class="controls" *ngIf="!gameOver">
+    <button (click)="onHigher()" [disabled]="showNextCard" class="btn btn-higher">
+      MAYOR
+    </button>
+    <button (click)="onLower()" [disabled]="showNextCard" class="btn btn-lower">
+      MENOR
+    </button>
+  </div>
+
+  <!-- Reiniciar juego -->
+  <div class="restart" *ngIf="gameOver">
+    <button (click)="onRestart()" class="btn btn-restart">
+      Jugar Nuevamente
+    </button>
+  </div>
+</div>

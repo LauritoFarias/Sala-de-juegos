@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Respuestas de Encuestas - Panel de Administración</h2>
+
+  <div *ngIf="cargando" class="estado-carga">
+    <div class="spinner"></div>
+    <p>Cargando encuestas...</p>
+  </div>
+
+  <div *ngIf="error" class="estado-error">
+    <p>❌ Error al cargar las encuestas. Intenta nuevamente.</p>
+    <button (click)="cargarEncuestas()" class="btn-reintentar">Reintentar</button>
+  </div>
+
+  <div *ngIf="!cargando && !error">
+    <div *ngIf="encuestas.length === 0" class="sin-datos">
+      <p>No hay encuestas registradas.</p>
+    </div>
+
+    <div *ngIf="encuestas.length > 0" class="tabla-contenedor">
+      <table class="tabla-encuestas">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Teléfono</th>
+            <th>Calificación</th>
+            <th>Servicios</th>
+            <th>Frecuencia</th>
+            <th>Juego Favorito</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let encuesta of encuestas">
+            <td>{{ formatearFecha(encuesta.creado_en!) }}</td>
+            <td>{{ encuesta.nombre_apellido }}</td>
+            <td>{{ encuesta.edad }}</td>
+            <td>{{ encuesta.telefono }}</td>
+            <td>
+              <span class="badge badge-{{ encuesta.calificacion_juegos.toLowerCase() }}">
+                {{ encuesta.calificacion_juegos }}
+              </span>
+            </td>
+            <td>
+              <div class="servicios-lista">
+                <span *ngFor="let servicio of encuesta.servicios_adicionales" 
+                      class="servicio-tag">
+                  {{ servicio }}
+                </span>
+              </div>
+            </td>
+            <td>{{ encuesta.frecuencia_visita }}</td>
+            <td class="juego-favorito">{{ encuesta.juego_favorito }}</td>
+            <td>{{ encuesta.email_referido }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="total-registros">
+        <p>Total de encuestas: {{ encuestas.length }}</p>
+      </div>
+    </div>
+  </div>
+</div>
