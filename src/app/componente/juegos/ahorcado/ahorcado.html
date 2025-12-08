@@ -1,5 +1,4 @@
 <div class="ahorcado-container">
-  <!-- Header con título centrado y botón a la derecha -->
   <div class="ahorcado-header">
     <h2>Ahorcado</h2>
     <button [routerLink]="['/contenido/home']" class="btn-volver">← Volver</button>
@@ -10,7 +9,6 @@
     <p>Palabras adivinadas: {{palabrasAdivinadas}}</p>
   </div>
 
-  <!-- Botón de reinicio -->
   <button *ngIf="juegoTerminado" (click)="iniciarJuego()" class="btn-reiniciar">
     🔄 Jugar de nuevo
   </button>

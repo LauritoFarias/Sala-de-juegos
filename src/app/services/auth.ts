@@ -31,8 +31,6 @@ export class Auth {
   private async initializeAuth(): Promise<void> {
     if (this.isInitialized) return;
     
-    console.log('🔄 Inicializando sistema de autenticación...');
-    
     await this.checkCurrentUser();
     
     this.setupAuthListener();
@@ -74,9 +72,6 @@ export class Auth {
 
   async checkCurrentUser(): Promise<void> {
     try {
-      console.log('🔍 Iniciando verificación de usuario...');
-      
-      console.log('🔍 Paso 1: Obteniendo sesión...');
       const { data: { session }, error: sessionError } = await this.supabase.auth.getSession();
       
       if (sessionError) {
@@ -90,9 +85,6 @@ export class Auth {
         this.currentUser.next(null);
         return;
       }
-
-      console.log('✅ Sesión obtenida para:', session.user.email);
-      console.log('🔍 User ID:', session.user.id);
       
       console.log('🔍 Paso 2: Buscando usuario en BD...');
       const { data: user, error: userError } = await this.supabase
@@ -113,8 +105,6 @@ export class Auth {
         return;
       }
 
-      console.log('✅ Usuario encontrado en BD:', user.nombre);
-      console.log('✅ Rol:', user.role);
       this.currentUser.next(user);
       
     } catch (error) {
@@ -158,7 +148,6 @@ export class Auth {
 
   async isAdmin(): Promise<boolean> {
     try {
-      console.log('👑 Verificando permisos de administrador...');
       const user = this.currentUser.value;
       
       if (!user) {
